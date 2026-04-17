@@ -1,8 +1,11 @@
 from subprocess import Popen
 
 from fastapi import APIRouter
+from httpx import get, post
 from my_modules.scrcpy import Scrcpy
 from pydantic import BaseModel
+
+from wsl_bridge.vars import URL
 
 scrcpy_router = APIRouter(prefix="/scrcpy")
 
@@ -35,15 +38,31 @@ scrcpy = ScrcpyController()
 
 
 @scrcpy_router.get("/")
-async def status():
+def status():
     return scrcpy.status()
 
 
 @scrcpy_router.post("/start", response_model=ScrcpyStartResponse)
-async def start(serial: str) -> ScrcpyStartResponse:
+def start(serial: str) -> ScrcpyStartResponse:
     return scrcpy.start(serial)
 
 
 @scrcpy_router.post("/stop")
-async def stop() -> bool:
+def stop() -> bool:
     return scrcpy.stop()
+
+
+class ScrcpyClient:
+    url = f"{URL}/scrcpy"
+
+    @classmethod
+    def start(cls, serial: str):
+        return post(f"{cls.url}/start", params={"serial": serial})
+
+    @classmethod
+    def stop(cls):
+        return post(f"{cls.url}/stop")
+
+    @classmethod
+    def status(cls):
+        return get(f"{cls.url}/")

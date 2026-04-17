@@ -31,7 +31,9 @@ class ScrcpyController:
         return False
 
     def status(self) -> bool:
-        return bool(self.proc)
+        if self.proc and self.proc.poll() is None:
+            return True
+        return False
 
 
 scrcpy = ScrcpyController()
@@ -64,5 +66,5 @@ class ScrcpyClient:
         return post(f"{cls.url}/stop")
 
     @classmethod
-    def status(cls):
-        return get(f"{cls.url}/")
+    def status(cls) -> bool:
+        return get(f"{cls.url}/").text == "true"

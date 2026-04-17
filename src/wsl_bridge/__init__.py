@@ -5,4 +5,4 @@ from wsl_bridge.vars import SERVER_HOST, SERVER_PORT
 
 
 def main():
-    uvicorn.run(app, host=SERVER_HOST, port=SERVER_PORT)
+    uvicorn.run(app, host=SERVER_HOST, port=SERVER_PORT, log_config=None)

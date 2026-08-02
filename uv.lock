@@ -553,7 +553,7 @@ wheels = [
 [[package]]
 name = "my-modules"
 version = "0.1.0"
-source = { git = "https://github.com/SeshuTarapatla/my-modules.git#ebc56f70f0bb1a7f918f2943cdd4eb89684bc8aa" }
+source = { git = "https://github.com/SeshuTarapatla/my-modules.git?rev=94b308a#94b308a5a31aea215fe3404bffb21922864c0fdc" }
 dependencies = [
     { name = "adbutils" },
     { name = "kubernetes" },
@@ -1279,7 +1279,7 @@ dev = [
 requires-dist = [
     { name = "fastapi", specifier = ">=0.136.0" },
     { name = "httpx", specifier = ">=0.28.1" },
-    { name = "my-modules", git = "https://github.com/SeshuTarapatla/my-modules.git" },
+    { name = "my-modules", git = "https://github.com/SeshuTarapatla/my-modules.git?rev=94b308a" },
     { name = "uvicorn", specifier = ">=0.44.0" },
 ]
 
